@@ -16,11 +16,16 @@ umi.use(mplTokenMetadata())
 const mint = generateSigner(umi);
 
 (async () => {
-    // let tx = ???
-    // let result = await tx.sendAndConfirm(umi);
-    // const signature = base58.encode(result.signature);
+    let tx = createNft(umi, {
+        mint,
+        name: "ATH RUG",
+        symbol: "ATHR",
+        uri: "https://devnet.irys.xyz/8Q1eyFNuuZ6s8yLTNF2ETbApJztDZ3tCXU6Nd3DtSVbX",
+        sellerFeeBasisPoints: percentAmount(2), });
+    let result = await tx.sendAndConfirm(umi);
+    const signature = base58.encode(result.signature);
     
-    // console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
+    console.log(`Succesfully Minted! Check out your TX here:\nhttps://explorer.solana.com/tx/${signature}?cluster=devnet`)
 
     console.log("Mint Address: ", mint.publicKey);
 })();
